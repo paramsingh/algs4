@@ -1,6 +1,7 @@
 public class Percolation {
     // boolean grid for all sites
     private boolean id[][];
+    
     private WeightedQuickUnionUF qf;
     private int size;
     private int top;
@@ -22,7 +23,7 @@ public class Percolation {
         
         size = N;
         top = size * size;
-        bottom = size * size;
+        bottom = size * size + 1;
 
         int i, j;
         for(i = 0; i < N; i++)
@@ -42,43 +43,43 @@ public class Percolation {
 
     public void open(int i, int j) {
         validate(i, j);
-        i = i-1;
-        j = j-1;
-        id[i-1][j-1] = true;
-        int current = convert(i, j);
+        int x = i-1;
+        int y = j-1;
+        id[x][y] = true;
+        int current = convert(x, y);
 
         // union the cells above and below
-        if(i==0) {
-            if(isOpen(i+2, j+1))
-                qf.union(current, convert(i+1, j));
+        if(x==0) {
+            if(isOpen(x+2, y+1))
+                qf.union(current, convert(x+1, y));
             qf.union(current, top);
         }
-        else if(i==size-1) {
-            if(isOpen(i, j+1))            
-                qf.union(current, convert(i-1, j));
+        else if(x==size-1) {
+            if(isOpen(x, y+1))            
+                qf.union(current, convert(x-1, y));
             qf.union(current, bottom);
         }
         else {
-            if(isOpen(i, j+1)) 
-                qf.union(current, convert(i-1, j));
-            if(isOpen(i+2, j+1))
-                qf.union(current, convert(i+1, j));
+            if(isOpen(x, y+1)) 
+                qf.union(current, convert(x-1, y));
+            if(isOpen(x+2, y+1))
+                qf.union(current, convert(x+1, y));
         }
 
         // union the cells left and right
-        if(j != size-1 && j != 0) {
-            if(isOpen(i+1, j))
-                qf.union(current, convert(i, j-1));
-            if(isOpen(i+1, j+2))
-                qf.union(current, convert(i, j+1));
+        if(y != size-1 && y != 0) {
+            if(isOpen(x+1, y))
+                qf.union(current, convert(x, y-1));
+            if(isOpen(x+1, y+2))
+                qf.union(current, convert(x, y+1));
         }
-        else if(j == size - 1) {
-            if(isOpen(i+1, j))
-                qf.union(current, convert(i, j-1));
+        else if(y == size - 1) {
+            if(isOpen(x+1, y))
+                qf.union(current, convert(x, y-1));
         }
-        else if(j == 0) {
-            if(isOpen(i+1, j+2))
-                qf.union(current, convert(i, j+1));
+        else if(y == 0) {
+            if(isOpen(x+1, y+2))
+                qf.union(current, convert(x, y+1));
         }
     }
 
