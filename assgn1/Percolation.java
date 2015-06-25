@@ -1,7 +1,11 @@
+/*
+ * Author: Param Singh
+ * Date: 25/06/2015
+ */
 public class Percolation {
     // boolean grid for all sites
     private boolean id[][];
-    
+
     private WeightedQuickUnionUF qf;
     private int size;
     private int top;
@@ -20,7 +24,7 @@ public class Percolation {
         // 2 extra spots to see if connected to the top
         // and bottom
         qf = new WeightedQuickUnionUF(N*N + 2);
-        
+
         size = N;
         top = size * size;
         bottom = size * size + 1;
@@ -90,7 +94,7 @@ public class Percolation {
 
     public boolean isFull(int i, int j) {
         validate(i, j);
-        return qf.connected(convert(i-1, j-1), top); 
+        return qf.connected(convert(i-1, j-1), top);
     }
 
     public boolean percolates() {
