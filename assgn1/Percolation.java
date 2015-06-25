@@ -55,12 +55,12 @@ public class Percolation {
             qf.union(current, top);
         }
         else if(x==size-1) {
-            if(isOpen(x, y+1))            
+            if(isOpen(x, y+1))
                 qf.union(current, convert(x-1, y));
             qf.union(current, bottom);
         }
         else {
-            if(isOpen(x, y+1)) 
+            if(isOpen(x, y+1))
                 qf.union(current, convert(x-1, y));
             if(isOpen(x+2, y+1))
                 qf.union(current, convert(x+1, y));
