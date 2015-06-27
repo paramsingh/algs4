@@ -52,6 +52,11 @@ public class Percolation {
         id[x][y] = true;
         int current = convert(x, y);
 
+        if (size == 1) {
+            qf.union(current, top);
+            qf.union(current, bottom);
+            return;
+        }
         // union the cells above and below
         if (x == 0) {
             if (isOpen(x+2, y+1))
