@@ -37,7 +37,7 @@ public class Percolation {
     }
 
     private void validate(int x, int y) {
-        if (x <= 0 || y > size)
+        if (x < 1 || x > size || y < 1 || y > size)
             throw new IndexOutOfBoundsException();
     }
 
