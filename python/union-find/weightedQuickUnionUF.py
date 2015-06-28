@@ -10,12 +10,12 @@ class WeightedQuickUnionUF:
         return self._count
 
     def find(self, p):
-        self.validate(p)
+        self._validate(p)
         while p != self._parent[p]:
             p = self._parent[p]
         return p
 
-    def validate(self, p):
+    def _validate(self, p):
         n = len(self._parent)
         if p < 0 or p >= n:
             raise IndexError("Index %s is not between 0 and %s" % (p, n))
