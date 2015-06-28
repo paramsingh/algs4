@@ -39,17 +39,17 @@ class WeightedQuickUnionUF:
             self._size[rootP] += self._size[rootQ]
 
         self._count -= 1
-
-n = int(raw_input())
-uf = WeightedQuickUnionUF(n)
-print "Enter quit to stop"
-line = raw_input()
-while line != 'quit':
-    p, q = map(int, line.split())
-    if uf.connected(p, q):
-        continue
-
-    uf.union(p, q)
-    print "%d  %d" % (p, q)
+if __name__ == '__main__':
+    n = int(raw_input())
+    uf = WeightedQuickUnionUF(n)
+    print "Enter quit to stop"
     line = raw_input()
-print "%d components" % uf.count()
+    while line != 'quit':
+        p, q = map(int, line.split())
+        if uf.connected(p, q):
+            continue
+
+        uf.union(p, q)
+        print "%d  %d" % (p, q)
+        line = raw_input()
+    print "%d components" % uf.count()

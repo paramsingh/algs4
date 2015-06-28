@@ -1,11 +1,11 @@
-from weightedQuickUnionUF import WeightedQuickUnionUf
+from weightedQuickUnionUF import WeightedQuickUnionUF
 
 class Percolation:
     def __init__(self, n):
         if n <= 0:
             raise ValueError("n should be greater than 0")
 
-        self._grid = [[False for _ in range(n)] for _ in range(n]
+        self._grid = [[False for _ in range(n)] for _ in range(n)]
         self._size = n
 
         # a quick find data structure containing sites for
@@ -20,7 +20,7 @@ class Percolation:
         self._bottom = self._top + 1
 
     def _validate(self, i , j):
-         """Check if indexes passed are valid, if invalid, throw an IndexError"""
+        """Check if indexes passed are valid, if invalid, throw an IndexError"""
         if i <= 0 or i > self._size or j <= 0 or j > self._size:
             raise IndexError(str(i) + ", " + str(j))
 
@@ -55,6 +55,7 @@ class Percolation:
             if self.is_open(i-1, j):
                 self._qf.union(self._convert(x, y), self._convert(x-1, y))
                 self._nf.union(self._convert(x, y), self._convert(x-1, y))
+            self._qf.union(self._convert(x, y), self._bottom)
 
         else:
             # check both sites above and below
@@ -69,12 +70,12 @@ class Percolation:
         if y == 0:
             # check only the right site
             if self.is_open(i, j+1):
-                self._qf.union(self._convert(x, y), self.convert(x, y+1))
-                self._nf.union(self._convert(x, y), self.convert(x, y+1))
+                self._qf.union(self._convert(x, y), self._convert(x, y+1))
+                self._nf.union(self._convert(x, y), self._convert(x, y+1))
         elif y == self._size - 1:
             if self.is_open(i, j-1):
-                self._qf.union(self._convert(x, y), self.convert(x, y-1))
-                self._nf.union(self._convert(x, y), self.convert(x, y-1))
+                self._qf.union(self._convert(x, y), self._convert(x, y-1))
+                self._nf.union(self._convert(x, y), self._convert(x, y-1))
         else:
             if self.is_open(i, j-1):
                 self._qf.union(self._convert(x, y), self._convert(x, y-1))
@@ -100,3 +101,17 @@ class Percolation:
 
     def percolates(self):
         return self._qf.connected(self._top, self._bottom)
+
+if __name__ == '__main__':
+    n = int(raw_input("Enter the size: "))
+    p = Percolation(n)
+    print "Enter 'quit' to quit"
+    i = ''
+    while i != 'quit':
+        x, y = map(int, raw_input().split())
+        if not p.is_open(x, y):
+            p.open(x, y)
+        if p.percolates():
+            print "Percolates"
+        else:
+            print "Does not percolate"
