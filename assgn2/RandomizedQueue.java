@@ -38,7 +38,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int index = StdRandom.uniform(size);
         Item val = queue[index];
         queue[index] = queue[size-1];
-        queue[size] = null;
+        queue[size-1] = null;
         size--;
 
         if (size < (capacity / 4))
@@ -96,7 +96,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public boolean hasNext() {
-            return i == size;
+            return !(i == size);
         }
 
         public Item next() {
@@ -112,8 +112,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         for(int i = 0; i < 10; i++) {
             rq.enqueue(i+"");
         }
+        String[] a = new String[10];
+        int i = 0;
+        for(String s: rq) {
+            for(String s1: rq)
+                System.out.print(s1+", ");
+            System.out.println();
+            a[i++] = s;
+        }
 
-        for(String s: rq)
-            System.out.println(s);
+        for(String s: a)
+            System.out.print(s + ", ");
+        System.out.println();
     }
 }
