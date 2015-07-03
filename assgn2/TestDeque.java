@@ -1,5 +1,5 @@
 public class TestDeque {
-    Deque<Integer> d;
+    private Deque<Integer> d;
 
     public TestDeque() {
         d = new Deque<Integer>();

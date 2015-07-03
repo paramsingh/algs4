@@ -32,7 +32,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public Item dequeue() {
-        if(isEmpty())
+        if (isEmpty())
             throw new NoSuchElementException("Empty queue");
 
         int index = StdRandom.uniform(size);
@@ -86,7 +86,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         private Item[] q = (Item[]) new Object[size];
         public RQIterator() {
             i = 0;
-            for(int j = 0; j < size; j++)
+            for (int j = 0; j < size; j++)
                 q[j] = queue[j];
             StdRandom.shuffle(q);
         }
@@ -109,19 +109,19 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public static void main(String[] args) {
         RandomizedQueue<String> rq = new RandomizedQueue<String>();
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             rq.enqueue(i+"");
         }
         String[] a = new String[10];
         int i = 0;
-        for(String s: rq) {
-            for(String s1: rq)
+        for (String s: rq) {
+            for (String s1: rq)
                 System.out.print(s1+", ");
             System.out.println();
             a[i++] = s;
         }
 
-        for(String s: a)
+        for (String s: a)
             System.out.print(s + ", ");
         System.out.println();
     }
