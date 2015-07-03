@@ -109,7 +109,6 @@ public class Deque<Item> implements Iterable<Item> {
 
     private class DequeIterator implements Iterator<Item> {
         Node cur;
-
         public DequeIterator() {
             cur = first;
         }
@@ -124,9 +123,10 @@ public class Deque<Item> implements Iterable<Item> {
 
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            return cur.next.item;
+
+            Item val = cur.item;
+            cur = cur.next;
+            return val;
         }
-
     }
-
 }
