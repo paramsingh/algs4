@@ -9,7 +9,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public RandomizedQueue() {
         size = 0;
-        queue = null;
+        queue = (Item[]) new Object[1];
         capacity = 1;
     }
 
@@ -73,7 +73,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item sample() {
         if (isEmpty())
             throw new NoSuchElementException("Empty queue");
-
         int index = StdRandom.uniform(size);
         return queue[index];
     }
@@ -84,9 +83,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private class RQIterator implements Iterator<Item> {
         private int i;
+        private Item[] q = (Item[]) new Object[size];
         public RQIterator() {
             i = 0;
-            StdRandom.shuffle(queue, 0, size-1);
+            for(int j = 0; j < size; j++)
+                q[j] = queue[j];
+            StdRandom.shuffle(q);
         }
 
         public void remove() {
@@ -98,9 +100,20 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
-            Item val = queue[i];
+            if (!hasNext()) throw new NoSuchElementException();
+            Item val = q[i];
             i++;
             return val;
         }
+    }
+
+    public static void main(String[] args) {
+        RandomizedQueue<String> rq = new RandomizedQueue<String>();
+        for(int i = 0; i < 10; i++) {
+            rq.enqueue(i+"");
+        }
+
+        for(String s: rq)
+            System.out.println(s);
     }
 }
