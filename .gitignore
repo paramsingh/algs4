@@ -3,3 +3,5 @@ bin/*
 checkstyle-5.5/*
 findbugs-2.0.3/*
 *.class
+*.zip
+*.pyc
