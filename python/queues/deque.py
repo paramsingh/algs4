@@ -47,7 +47,7 @@ class Deque:
 
     def remove_first(self):
         if self.is_empty():
-            raise Error("Can't remove from an empty deque")
+            raise Exception("Can't remove from an empty deque")
 
         val = self._first.item
         # if there is only one element in deque
@@ -64,7 +64,7 @@ class Deque:
 
     def remove_last(self):
         if self.is_empty():
-            raise Error("Can't remove from an empty deque")
+            raise Exception("Can't remove from an empty deque")
 
         val = self._last.item
         if self._first == self._last:

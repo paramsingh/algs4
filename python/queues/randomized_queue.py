@@ -15,7 +15,7 @@ class RandomizedQueue:
 
     def enqueue(self, item):
         if item == None:
-            raise Error("Can't add None to queue")
+            raise Exception("Can't add None to queue")
 
         if self._size == self._capacity:
             # Python list appends are constant amortized time
@@ -27,7 +27,7 @@ class RandomizedQueue:
 
     def dequeue(self):
         if self.is_empty():
-            raise Error("Empty Queue")
+            raise Exception("Empty Queue")
 
         x = randint(0, self._size-1)
         val = self._queue[x]
@@ -38,7 +38,7 @@ class RandomizedQueue:
 
     def sample(self):
         if self.is_empty():
-            raise Error("Empty queue")
+            raise Exception("Empty queue")
 
         x = randint(0, size-1)
         return self._queue[x]
