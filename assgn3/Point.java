@@ -37,14 +37,13 @@ public class Point implements Comparable<Point> {
     }
 
     public double slopeTo(Point that) {
-        // Check if the line is horizontal
+        // Check if the line is vertical
         if (this.x == that.x)
-            return 0.0;
-        // Check if line is vertical
-        if (this.y == that.y)
             return Double.POSITIVE_INFINITY;
-        // Check if this == that
-        else if (this.compareTo(that) == 0)
+        // Check if line is horizontal
+        if (this.y == that.y)
+            return 0.0;
+        if (this.compareTo(that) == 0)
             return Double.NEGATIVE_INFINITY;
 
         double slope = (this.y - that.y) / (this.x - that.x);
