@@ -43,10 +43,11 @@ public class Point implements Comparable<Point> {
         // Check if line is horizontal
         if (this.y == that.y)
             return 0.0;
+        // Check if both points are the same
         if (this.compareTo(that) == 0)
             return Double.NEGATIVE_INFINITY;
 
-        double slope = (this.y - that.y) / (this.x - that.x);
+        double slope = ((double)(this.y - that.y)) / (this.x - that.x);
         return slope;
     }
 
@@ -61,5 +62,11 @@ public class Point implements Comparable<Point> {
             else
                 return 0;
         }
+    }
+
+    public static void main(String[] args) {
+        Point a = new Point(6000, 4000);
+        Point b = new Point(0, 1000);
+        System.out.println(a.slopeTo(b));
     }
 }
