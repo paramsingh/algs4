@@ -42,15 +42,13 @@ public class Fast {
                         line.add(aux[j-1]);
                         Collections.sort(line);
                         String l = new String();
-                        for (Point a: line)
-                            l = l + a.toString() + " -> ";
+                        for (int k = 0; k < line.size()-1; k++)
+                            l = l + line.get(k).toString() + " -> ";
+                        l = l + line.get(line.size()-1);
                         if (printed.containsKey(l))
                             break if1;
                         line.get(0).drawTo(line.get(line.size()-1));
-                        System.out.print(list[i].toString() + " -> ");
-                        for (int k = j-consecutive; k < j-1; k++)
-                            System.out.print(aux[k].toString() + " -> ");
-                        System.out.println(aux[j-1].toString());
+                        System.out.println(l);
                         printed.put(l, true);
                     }
                     consecutive = 1;
@@ -64,15 +62,13 @@ public class Fast {
                 line.add(aux[numPoints-1]);
                 Collections.sort(line);
                 String l = new String();
-                for (Point a: line)
-                    l += a.toString() + " -> ";
+                for(int k = 0; k < line.size() - 1; k++)
+                    l += line.get(k).toString() + " -> ";
+                l += line.get(line.size() - 1);
                 if (printed.containsKey(l))
                     break if2;
                 line.get(0).drawTo(line.get(line.size()-1));
-                System.out.print(list[i].toString() + " -> ");
-                for (int k = numPoints-consecutive; k < numPoints-1; k++)
-                    System.out.print(aux[k].toString() + " -> ");
-                System.out.println(aux[numPoints-1].toString());
+                System.out.println(l);
                 printed.put(l, true);
             }
         }
