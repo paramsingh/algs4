@@ -11,6 +11,8 @@ import java.util.List;
 public class Fast {
     public static void main(String[] args) {
         In in = new In(args[0]);
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
         int numPoints = in.readInt();
         Point[] list = new Point[numPoints];
         Point[] aux = new Point[numPoints];
@@ -19,6 +21,7 @@ public class Fast {
             int x = in.readInt();
             int y = in.readInt();
             list[i] = new Point(x, y);
+            list[i].draw();
             aux[i] = new Point(x, y);
         }
 
@@ -43,8 +46,9 @@ public class Fast {
                             l = l + a.toString() + " -> ";
                         if (printed.containsKey(l))
                             break if1;
+                        line.get(0).drawTo(line.get(line.size()-1));
                         System.out.print(list[i].toString() + " -> ");
-                        for(int k = j-consecutive; k < j-1; k++)
+                        for (int k = j-consecutive; k < j-1; k++)
                             System.out.print(aux[k].toString() + " -> ");
                         System.out.println(aux[j-1].toString());
                         printed.put(l, true);
@@ -64,6 +68,7 @@ public class Fast {
                     l += a.toString() + " -> ";
                 if (printed.containsKey(l))
                     break if2;
+                line.get(0).drawTo(line.get(line.size()-1));
                 System.out.print(list[i].toString() + " -> ");
                 for (int k = numPoints-consecutive; k < numPoints-1; k++)
                     System.out.print(aux[k].toString() + " -> ");
