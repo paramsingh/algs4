@@ -2,6 +2,7 @@
  * Author: Param Singh <paramsingh258@gmail.com>
  * Time: Friday, 24 July 2015 03:13:03 AM
  */
+import java.util.Stack;
 
 public class Board {
     private int[][] board;
@@ -92,6 +93,12 @@ public class Board {
     }
 
     public boolean equals(Object y) {
-        // pass
+        if (this == y) return true;
+        if (y == null) return false;
+        if (this.getClass() != y.getClass()) return false;
+        Board that = (Board) y;
+        if (that.dimension() != len) return false;
+
+        return this.toString().equals(that.toString());
     }
 }
