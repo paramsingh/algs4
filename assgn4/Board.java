@@ -47,6 +47,11 @@ public class Board {
         int i, j;
         for (i = 0; i < len; i++) {
             for (j = 0; j < len; j++) {
+                if (cur == len * len) {
+                    if (board[i][j] != 0)
+                        score++;
+                    continue;
+                }
                 if (board[i][j] != cur)
                     score++;
                 cur++;
@@ -67,21 +72,11 @@ public class Board {
                 score += Math.abs(i - x) + Math.abs(j - y);
             }
         }
-
         return score;
     }
 
     public boolean isGoal() {
-        int cur = 1;
-        int i, j;
-        for (i = 0; i < len; i++) {
-            for (j = 0; j < len; j++) {
-                if (board[i][j] != cur)
-                    return false;
-                cur++;
-            }
-        }
-        return true;
+        return hamming() == 0;
     }
 
     public Board twin() {
@@ -183,13 +178,21 @@ public class Board {
         In in = new In(args[0]);
         int n = in.readInt();
         int[][] blocks = new int[n][n];
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
+        int[][] goal   = new int[n][n];
+        int cur = 1;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 blocks[i][j] = in.readInt();
+                goal[i][j] = cur++;
+            }
+        }
+        goal[n-1][n-1] = 0;
         Board b = new Board(blocks);
+        Board g = new Board(goal);
 
         // testing toString()
         StdOut.println(b);
+        StdOut.println(g);
 
         // testing neighbors()
         for(Board board: b.neighbors())
@@ -198,12 +201,18 @@ public class Board {
         // testing equals()
         Board b2 = new Board(blocks);
         System.out.println(b.equals(b2));
+        System.out.println(b.equals(g));
 
         // testing twin()
         StdOut.println(b.twin());
 
         // testing manhattan()
         StdOut.println(b.manhattan());
+        StdOut.println(g.manhattan());
+
+        // testing isGoal()
+        StdOut.println("B is goal: " + b.isGoal());
+        StdOut.println("goal is goal: " + g.isGoal());
     }
 }
 
