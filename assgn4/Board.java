@@ -61,6 +61,7 @@ public class Board {
 
         for (i = 0; i < len; i++) {
             for (j = 0; j < len; j++) {
+                if (board[i][j] == 0) continue;
                 int x = (board[i][j] - 1) / len;
                 int y = (board[i][j] - 1) % len;
                 score += Math.abs(i - x) + Math.abs(j - y);
@@ -179,7 +180,30 @@ public class Board {
     }
 
     public static void main(String[] args) {
-        // pass
+        In in = new In(args[0]);
+        int n = in.readInt();
+        int[][] blocks = new int[n][n];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                blocks[i][j] = in.readInt();
+        Board b = new Board(blocks);
+
+        // testing toString()
+        StdOut.println(b);
+
+        // testing neighbors()
+        for(Board board: b.neighbors())
+            StdOut.println(board);
+
+        // testing equals()
+        Board b2 = new Board(blocks);
+        System.out.println(b.equals(b2));
+
+        // testing twin()
+        StdOut.println(b.twin());
+
+        // testing manhattan()
+        StdOut.println(b.manhattan());
     }
 }
 
