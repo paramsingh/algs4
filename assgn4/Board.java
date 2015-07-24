@@ -9,7 +9,6 @@ import java.util.Arrays;
 public class Board {
     private int[][] board;
     private int len;
-    private int[][] goal;
 
     private int[][] blocks() {
         int[][] copy = new int[len][len];
@@ -27,14 +26,11 @@ public class Board {
         int cur = 1;
         int i, j;
         board = new int[len][len];
-        goal = new int[len][len];
         for (i = 0; i < len; i++) {
             for (j = 0; j < len; j++) {
                 board[i][j] = blocks[i][j];
-                goal[i][j]  = cur++;
             }
         }
-        goal[len-1][len-1] = 0;
     }
 
     public int dimension() {
@@ -42,21 +38,20 @@ public class Board {
     }
 
     public int hamming() {
-        int cur = 1;
         int score = 0;
         int i, j;
+
         for (i = 0; i < len; i++) {
             for (j = 0; j < len; j++) {
-                if (cur == len * len) {
-                    if (board[i][j] != 0)
-                        score++;
+                if (board[i][j] == 0)
                     continue;
-                }
-                if (board[i][j] != cur)
+                int x = (board[i][j] - 1) / len;
+                int y = (board[i][j] - 1) % len;
+                if ( x != i || y != j)
                     score++;
-                cur++;
             }
         }
+
         return score;
     }
 
@@ -209,6 +204,9 @@ public class Board {
         // testing manhattan()
         StdOut.println(b.manhattan());
         StdOut.println(g.manhattan());
+
+        // testing hamming()
+        StdOut.println("Hamming: "+b.hamming());
 
         // testing isGoal()
         StdOut.println("B is goal: " + b.isGoal());

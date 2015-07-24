@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Solver {
-    private SearchNode sol;
-    private boolean solvable;
+    private SearchNode sol; private boolean solvable;
     private int moves;
 
     private class SearchNode implements Comparable<SearchNode> {
@@ -65,7 +64,7 @@ public class Solver {
 
             for (Board neighbor: min2.board.neighbors()) {
                 if (min.prev == null || !neighbor.equals(min2.prev.board)) {
-                    cur2 = new SearchNode(min2.moves + 1, neighbor, min);
+                    cur2 = new SearchNode(min2.moves + 1, neighbor, min2);
                     nq.insert(cur2);
                 }
             }
@@ -94,7 +93,7 @@ public class Solver {
 
         List<Board> list = new ArrayList<Board>();
         SearchNode cur = this.sol;
-        while (cur.prev != null) {
+        while (cur != null) {
             list.add(0, cur.board);
             cur = cur.prev;
         }
