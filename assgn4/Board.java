@@ -61,10 +61,9 @@ public class Board {
 
         for (i = 0; i < len; i++) {
             for (j = 0; j < len; j++) {
-                int x = board[i][j] / len;
-                int y = board[i][j] % len;
-
-                score += (i + j) - (x + y);
+                int x = (board[i][j] - 1) / len;
+                int y = (board[i][j] - 1) % len;
+                score += Math.abs(i - x) + Math.abs(j - y);
             }
         }
 
